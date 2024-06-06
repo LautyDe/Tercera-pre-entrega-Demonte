@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Shoe, Shirt, Seller, Sell
+from .models import Shoe, Shirt, User
 
 
 """ class CurseAdmin(admin.ModelAdmin):
@@ -10,5 +10,4 @@ from .models import Shoe, Shirt, Seller, Sell
 # Register your models here.
 admin.site.register(Shoe)
 admin.site.register(Shirt)
-admin.site.register(Seller)
-admin.site.register(Sell)
+admin.site.register(User)

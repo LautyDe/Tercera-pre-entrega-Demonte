@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .forms import Shoe_Form, Shirt_Form, Register_Form
 from .models import Shoe, Shirt, User
 
@@ -58,23 +57,6 @@ def shirts(req):
   return render(req, 'shirts.html', {'shirts': all_shirts})
 
 """
-def add_curse(req):
-  if req.method == 'POST':
-    my_form = Curse_Form(req.POST)
-    if my_form.is_valid():
-      data = my_form.cleaned_data
-      new_curse = Curse(name = data['name'], category = data['category'])
-      new_curse.save()
-      return render(req, 'init.html',{'message': 'curse created'}) 
-    else:
-      return render(req, 'init.html',{'message': 'invalid data'}) 
-  else:
-    my_form = Curse_Form()
-    return render(req, 'curse_form.html',{'my_form': my_form}) 
-  
-def search_category(req):
-  return render(req, 'search_category.html', {})
-
 def search_curse(req):
   if req.GET["category"]:
     category = req.GET["category"]
