@@ -1,0 +1,10 @@
+{% extends 'padre.html' %} {% block changing_content %}
+<h1>Lista de zapatillas</h1>
+
+{% if shirts %}
+<ul>
+  {% for shirt in shirts %}
+  <li>{{shirt.model}} - {{shirt.size}}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% endblock changing_content %}

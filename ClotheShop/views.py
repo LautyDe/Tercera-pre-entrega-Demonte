@@ -15,10 +15,10 @@ def shoe_form(req):
       new_shoe.save()
       return render(req, 'init.html',{'message': 'shoe created'}) 
     else:
-      return render(req, 'shoe.html',{'message': 'invalid data'}) 
+      return render(req, 'shoes.html',{'message': 'invalid data'}) 
   else:
     my_form = Shoe_Form()
-    return render(req, 'shoe.html',{'my_form': my_form})
+    return render(req, 'add_shoe.html',{'my_form': my_form})
   
 def shirt_form(req):
   if req.method == 'POST':
@@ -29,10 +29,10 @@ def shirt_form(req):
       new_shirt.save()
       return render(req, 'init.html',{'message': 'shirt created'}) 
     else:
-      return render(req, 'shirt.html',{'message': 'invalid data'}) 
+      return render(req, 'shirts.html',{'message': 'invalid data'}) 
   else:
     my_form = Shirt_Form()
-    return render(req, 'shirt.html',{'my_form': my_form})
+    return render(req, 'add_shirt.html',{'my_form': my_form})
   
 def register(req):
   if req.method == 'POST':
@@ -53,7 +53,7 @@ def shoes(req):
   return render(req, 'shoes.html', {'shoes': all_shoes})
 
 def shirts(req):
-  all_shirts = Shoe.objects.all()
+  all_shirts = Shirt.objects.all()
   return render(req, 'shirts.html', {'shirts': all_shirts})
 
 """
