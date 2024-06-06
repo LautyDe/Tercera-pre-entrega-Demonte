@@ -22,5 +22,7 @@ class User(models.Model):
   name = models.CharField(max_length=30)
   last_name = models.CharField(max_length=30)
   email = models.EmailField()
+  shoes = models.ForeignKey(Shoe, null=True, blank=True)
+  shirts = models.ForeignKey(Shirt, null=True, blank=True)
   def __str__(self):
     return f'{self.name} {self.last_name}'

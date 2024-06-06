@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import Shoe_Form, Shirt_Form, Seller_Form
-from .models import Shoe, Shirt, Seller
+from .forms import Shoe_Form, Shirt_Form, Register_Form
+from .models import Shoe, Shirt, User
 
 # Create your views here.
 def init(req):
@@ -35,50 +35,29 @@ def shirt_form(req):
     my_form = Shirt_Form()
     return render(req, 'shirt.html',{'my_form': my_form})
   
-def seller_form(req):
+def register(req):
   if req.method == 'POST':
-    my_form = Seller_Form(req.POST)
+    my_form = Register_Form(req.POST)
     if my_form.is_valid():
       data = my_form.cleaned_data
-      new_seller = Shirt(model = data['model'], size = data['size'])
-      new_seller.save()
-      return render(req, 'init.html',{'message': 'shirt created'}) 
+      new_user = User(name = data['name'], last_name = data['last_name'], email = data['email'])
+      new_user.save()
+      return render(req, 'init.html',{'message': 'user created'}) 
     else:
       return render(req, 'shirt.html',{'message': 'invalid data'}) 
   else:
-    my_form = Shirt_Form()
-    return render(req, 'shirt.html',{'my_form': my_form})
+    my_form = Register_Form()
+    return render(req, 'init.html',{'my_form': my_form})
 
 def shoes(req):
-  return render(req, 'shoes.html')
+  all_shoes = Shoe.objects.all()
+  return render(req, 'shoes.html', {'shoes': all_shoes})
 
 def shirts(req):
-  return render(req, 'shirts.html')
+  all_shirts = Shoe.objects.all()
+  return render(req, 'shirts.html', {'shirts': all_shirts})
 
-""" def curse(req, name, category):
-  new_curse = Curse(name = name, category = category)
-  new_curse.save()
-  return HttpResponse(f'curso creado')
-
-def get_curses(req):
-  curses = Curse.objects.all()
-  return render(req, 'get_curses.html',{'curses':curses})
-
-
-
-
-def curses(req):
-  return render(req, 'curses.html',{})
-
-def teachers(req):
-  return render(req, 'teachers.html',{})
-
-def students(req):
-  return render(req, 'students.html',{})
-
-def works(req):
-  return render(req, 'works.html',{})
-
+"""
 def add_curse(req):
   if req.method == 'POST':
     my_form = Curse_Form(req.POST)
