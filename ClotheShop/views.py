@@ -39,6 +39,8 @@ def register(req):
     my_form = Register_Form(req.POST)
     if my_form.is_valid():
       data = my_form.cleaned_data
+      if User.objects.filter(email=data['email']).exists():
+        return render(req, 'init.html', {'message': 'Email already registered'})
       new_user = User(name = data['name'], last_name = data['last_name'], email = data['email'])
       new_user.save()
       return render(req, 'init.html',{'message': f'Welcome {new_user.name}!'}) 
