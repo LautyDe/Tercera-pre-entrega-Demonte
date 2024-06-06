@@ -11,7 +11,7 @@ def shoe_form(req):
     my_form = Shoe_Form(req.POST)
     if my_form.is_valid():
       data = my_form.cleaned_data
-      new_shoe = Shoe(model = data['model'], size = data['size'])
+      new_shoe = Shoe(model = data['model'], size = data['size'], price = data['price'])
       new_shoe.save()
       return render(req, 'init.html',{'message': 'shoe created'}) 
     else:
@@ -25,7 +25,7 @@ def shirt_form(req):
     my_form = Shirt_Form(req.POST)
     if my_form.is_valid():
       data = my_form.cleaned_data
-      new_shirt = Shirt(model = data['model'], size = data['size'])
+      new_shirt = Shirt(model = data['model'], size = data['size'], price = data['price'])
       new_shirt.save()
       return render(req, 'init.html',{'message': 'shirt created'}) 
     else:
@@ -41,12 +41,12 @@ def register(req):
       data = my_form.cleaned_data
       new_user = User(name = data['name'], last_name = data['last_name'], email = data['email'])
       new_user.save()
-      return render(req, 'init.html',{'message': 'user created'}) 
+      return render(req, 'init.html',{'message': f'Welcome {new_user.name}!'}) 
     else:
-      return render(req, 'shirt.html',{'message': 'invalid data'}) 
+      return render(req, 'init.html',{'message': 'invalid data'}) 
   else:
     my_form = Register_Form()
-    return render(req, 'init.html',{'my_form': my_form})
+    return render(req, 'register.html',{'my_form': my_form})
 
 def shoes(req):
   all_shoes = Shoe.objects.all()
